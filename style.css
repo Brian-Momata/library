@@ -1,0 +1,60 @@
+/* Basic styling */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  background-color: #333;
+  color: white;
+  padding: 10px;
+  text-align: center;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  margin: 0 10px;
+}
+
+main {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+}
+
+/* Style for book listing */
+.book {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+
+/* Style for add book form */
+#add-book-form {
+  display: flex;
+  flex-direction: column;
+  max-width: 300px;
+  margin: 0 auto;
+}
+
+#add-book-form label {
+  margin-bottom: 5px;
+}
+
+#add-book-form input[type="text"], #add-book-form input[type="number"] {
+  margin-bottom: 10px;
+  padding: 5px;
+}
+
+#add-book-form input[type="submit"] {
+  background-color: #333;
+  color: white;
+  border: none;
+  padding: 8px 10px;
+  cursor: pointer;
+}
