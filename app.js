@@ -12,13 +12,15 @@ function Book(title, author, pages, read = false) {
   }
 }
 
-const addBookButton = document.getElementById("add-book-button");
+const addBookForm = document.getElementById("add-book-form");
 
-addBookButton.addEventListener('click', (event) => {
+addBookForm.addEventListener('submit', (event) => {
   addBook();
   resetForm();
-  event.preventDefault(); // prevent the form from submitting
+  event.preventDefault();
+  renderBooks();
 });
+
 
 function addBook(){
   const title = document.getElementById('title').value;
@@ -40,4 +42,20 @@ function resetForm(){
   author.value = '';
   pages.value = '';
   read.checked = false;
+}
+
+const renderBooks = () => {
+  const bookListContainer = document.getElementById('book-list');
+  bookListContainer.innerHTML = '';
+
+  myLibrary.forEach((book, index) => {
+    const bookItem = document.createElement('div');
+    bookItem.classList.add('book');
+    bookItem.setAttribute('data-index', index); // Set data-index attribute
+    bookItem.innerHTML = `
+      <h3>${book.title}</h3>
+      <p>Author: ${book.author}</p>
+    `;
+    bookListContainer.appendChild(bookItem);
+  });
 }

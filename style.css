@@ -35,6 +35,15 @@ main {
 }
 
 /* Style for add book form */
+#add-book {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: #f5f5f5;
+  padding: 20px;
+}
+
 #add-book-form {
   display: flex;
   flex-direction: column;
@@ -57,4 +66,8 @@ main {
   border: none;
   padding: 8px 10px;
   cursor: pointer;
+}
+
+#add-book h2 {
+  text-align: center;
 }
