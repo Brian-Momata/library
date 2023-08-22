@@ -1,5 +1,7 @@
 const myLibrary = [];
 
+const bookListContainer = document.getElementById('book-list');
+
 function Book(title, author, pages, read = false) {
   this.title = title
   this.author = author
@@ -45,7 +47,6 @@ function resetForm(){
 }
 
 const renderBooks = () => {
-  const bookListContainer = document.getElementById('book-list');
   bookListContainer.innerHTML = '';
 
   myLibrary.forEach((book, index) => {
@@ -56,6 +57,22 @@ const renderBooks = () => {
       <h3>${book.title}</h3>
       <p>Author: ${book.author}</p>
     `;
+
+    bookItem.addEventListener('click', () => {
+      navigateToBook(book);
+    });
+
     bookListContainer.appendChild(bookItem);
   });
+}
+
+function navigateToBook(book){
+  // Convert the myLibrary array to a JSON string
+  const libraryData = JSON.stringify(myLibrary);
+  
+  // Construct the URL with the book index and library data as query parameters
+  const bookPageIndex = `book_details.html?index=${myLibrary.indexOf(book)}&library=${encodeURIComponent(libraryData)}`;
+
+  // Navigate to the book details page
+  window.location.href = bookPageIndex;
 }

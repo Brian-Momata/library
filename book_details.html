@@ -11,7 +11,6 @@
     <h1>My Library</h1>
     <nav>
       <a href="index.html">Home</a>
-      <a href="add_book.html">Add Book</a>
     </nav>
   </header>
   
@@ -20,5 +19,31 @@
       <!-- Book details will be dynamically added here -->
     </div>
   </main>
+  <script>
+    // Get the library data from the query parameter
+    const urlParams = new URLSearchParams(window.location.search);
+    const libraryData = urlParams.get('library');
+
+    // Parse the JSON string back into an array
+    const myLibrary = JSON.parse(decodeURIComponent(libraryData));
+
+    // Get the book index from the query parameter
+    const bookIndex = urlParams.get('index');
+
+    if (bookIndex !== null) {
+      const book = myLibrary[parseInt(bookIndex)];
+      displayBookDetails(book);
+    }
+
+    function displayBookDetails(book){
+      const bookDetailsContainer = document.getElementById('book-details');
+      bookDetailsContainer.innerHTML = `
+      <h2>${book.title}</h2>
+      <p>Author: ${book.author}</p>
+      <p>Pages: ${book.pages}</p>
+      <p>${book.read ? 'Already read' : 'Not read yet'}</p>
+      `;
+    }
+  </script>
 </body>
 </html>
