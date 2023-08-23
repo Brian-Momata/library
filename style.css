@@ -72,3 +72,35 @@ main {
 #add-book h2 {
   text-align: center;
 }
+
+/* Style for action buttons */
+#delete-book,
+#mark-read,
+#mark-unread {
+  background-color: #333;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 12px;
+  margin: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+#delete-book:hover,
+#mark-read:hover,
+#mark-unread:hover {
+  background-color: #555;
+}
+
+#delete-book:focus,
+#mark-read:focus,
+#mark-unread:focus {
+  outline: none;
+}
+
+/* Style for action buttons container */
+#action-buttons {
+  text-align: center;
+  margin-top: 20px;
+}

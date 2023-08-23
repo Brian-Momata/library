@@ -76,3 +76,19 @@ function navigateToBook(book){
   // Navigate to the book details page
   window.location.href = bookPageIndex;
 }
+
+// Check whether the url has changed and update myLibrary
+
+function updateLibray(){
+  const currentURL = window.location.href;
+
+  if (currentURL !== 'http://127.0.0.1:5500/index.html'){
+    const urlParams = new URLSearchParams(window.location.search);
+    const newLibArray = JSON.parse(decodeURIComponent(urlParams.get('library')));
+
+    // Update the library using the library params in URL
+    myLibrary.splice(0, myLibrary.length, ...newLibArray);
+    renderBooks();
+  }
+}
+updateLibray();

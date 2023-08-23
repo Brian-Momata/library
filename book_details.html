@@ -19,6 +19,11 @@
       <!-- Book details will be dynamically added here -->
     </div>
   </main>
+  <div id="action-buttons">
+    <button id="delete-book">Delete Book</button>
+    <button id="mark-read">Mark Read</button>
+    <button id="mark-unread">Mark Unread</button>
+  </div>
   <script>
     // Get the library data from the query parameter
     const urlParams = new URLSearchParams(window.location.search);
@@ -43,6 +48,21 @@
       <p>Pages: ${book.pages}</p>
       <p>${book.read ? 'Already read' : 'Not read yet'}</p>
       `;
+    }
+
+    const deleteButton = document.getElementById('delete-book');
+
+    deleteButton.addEventListener('click', () => {
+      deleteBook();
+    })
+
+    function deleteBook(){
+      myLibrary.splice(bookIndex, 1);
+
+      const libraryData = JSON.stringify(myLibrary);
+      const homePage = `index.html?library=${encodeURIComponent(libraryData)}`;
+
+      window.location.href = homePage;
     }
   </script>
 </body>
