@@ -21,8 +21,7 @@
   </main>
   <div id="action-buttons">
     <button id="delete-book">Delete Book</button>
-    <button id="mark-read">Mark Read</button>
-    <button id="mark-unread">Mark Unread</button>
+    <button id="toggle-read">Change Read Status</button>
   </div>
   <script>
     // Get the library data from the query parameter
@@ -35,8 +34,10 @@
     // Get the book index from the query parameter
     const bookIndex = urlParams.get('index');
 
+    // Set the book variable
+    const book = myLibrary[parseInt(bookIndex)];
+
     if (bookIndex !== null) {
-      const book = myLibrary[parseInt(bookIndex)];
       displayBookDetails(book);
     }
 
@@ -51,10 +52,27 @@
     }
 
     const deleteButton = document.getElementById('delete-book');
+    const toggleReadButton = document.getElementById('toggle-read');
 
     deleteButton.addEventListener('click', () => {
       deleteBook();
-    })
+    });
+
+    toggleReadButton.addEventListener('click', () => {
+      book['read'] = !book['read'];
+      displayBookDetails(book);
+
+      // Update the URL parameters to reflect the changes
+      updateURLParams();
+    });
+
+    function updateURLParams() {
+      const libraryData = JSON.stringify(myLibrary);
+
+      // Update the URL with the modified library data
+      const newURL = `book_details.html?index=${bookIndex}&library=${encodeURIComponent(libraryData)}`;
+      history.replaceState(null, null, newURL);
+    }
 
     function deleteBook(){
       myLibrary.splice(bookIndex, 1);

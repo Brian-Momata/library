@@ -75,8 +75,7 @@ main {
 
 /* Style for action buttons */
 #delete-book,
-#mark-read,
-#mark-unread {
+#toggle-read {
   background-color: #333;
   color: white;
   border: none;
@@ -88,14 +87,12 @@ main {
 }
 
 #delete-book:hover,
-#mark-read:hover,
-#mark-unread:hover {
+#toggle-read:hover {
   background-color: #555;
 }
 
 #delete-book:focus,
-#mark-read:focus,
-#mark-unread:focus {
+#toggle-read:focus {
   outline: none;
 }
 
