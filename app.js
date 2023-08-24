@@ -1,21 +1,32 @@
 const myLibrary = [];
 
+// Get the container for the book list
 const bookListContainer = document.getElementById('book-list');
 
+// Constructor function for Book objects
 function Book(title, author, pages, read = false) {
-  this.title = title
-  this.author = author
-  this.pages = pages
-  this.read = read
+  this.title = title;
+  this.author = author;
+  this.pages = pages;
+  this.read = read;
   this.info = () => {
-    return "" + this.title + " by " + this.author +
-    ", " + this.pages + " pages." +
-    (this.read ? " Already read." : " Not read yet.");
-  }
+    return (
+      "" +
+      this.title +
+      " by " +
+      this.author +
+      ", " +
+      this.pages +
+      " pages." +
+      (this.read ? " Already read." : " Not read yet.")
+    );
+  };
 }
 
+// Get the add book form
 const addBookForm = document.getElementById("add-book-form");
 
+// Event listener for form submission
 addBookForm.addEventListener('submit', (event) => {
   addBook();
   resetForm();
@@ -23,7 +34,7 @@ addBookForm.addEventListener('submit', (event) => {
   renderBooks();
 });
 
-
+// Function to add a book to the library
 function addBook(){
   const title = document.getElementById('title').value;
   const author = document.getElementById('author').value;
@@ -34,6 +45,7 @@ function addBook(){
   myLibrary.push(newBook);
 }
 
+// Function to reset the form
 function resetForm(){
   const title = document.getElementById('title');
   const author = document.getElementById('author');
@@ -46,6 +58,7 @@ function resetForm(){
   read.checked = false;
 }
 
+// Function to render books in the book list container
 const renderBooks = () => {
   bookListContainer.innerHTML = '';
 
@@ -66,19 +79,14 @@ const renderBooks = () => {
   });
 }
 
+// Function to navigate to the book details page
 function navigateToBook(book){
-  // Convert the myLibrary array to a JSON string
   const libraryData = JSON.stringify(myLibrary);
-  
-  // Construct the URL with the book index and library data as query parameters
   const bookPageIndex = `book_details.html?index=${myLibrary.indexOf(book)}&library=${encodeURIComponent(libraryData)}`;
-
-  // Navigate to the book details page
   window.location.href = bookPageIndex;
 }
 
-// Check whether the url has changed and update myLibrary
-
+// Function to update library based on URL parameters
 function updateLibray(){
   const currentURL = window.location.href;
 
@@ -86,7 +94,6 @@ function updateLibray(){
     const urlParams = new URLSearchParams(window.location.search);
     const newLibArray = JSON.parse(decodeURIComponent(urlParams.get('library')));
 
-    // Update the library using the library params in URL
     myLibrary.splice(0, myLibrary.length, ...newLibArray);
     renderBooks();
   }
