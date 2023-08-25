@@ -31,6 +31,7 @@ addBookForm.addEventListener('submit', (event) => {
   addBook();
   resetForm();
   event.preventDefault();
+  dialog.close();
   renderBooks();
 });
 
@@ -99,3 +100,16 @@ function updateLibray(){
   }
 }
 updateLibray();
+
+// Handling the dialog for adding the book
+const openDialogButton = document.getElementById("open-dialog-button");
+const dialog = document.getElementById("add-book-dialog");
+const closeDialogButton = document.getElementById("close-dialog-button");
+
+openDialogButton.addEventListener("click", function () {
+  dialog.showModal();
+});
+
+closeDialogButton.addEventListener("click", function () {
+  dialog.close();
+});
