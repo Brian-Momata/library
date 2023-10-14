@@ -12,6 +12,15 @@ const openDialogButton = document.getElementById('open-dialog-button');
 const dialog = document.getElementById('add-book-dialog');
 const closeDialogButton = document.getElementById('close-dialog-button');
 
+// Pick inputs span elements where we will place the error message
+const title = document.getElementById('title');
+const author = document.getElementById('author');
+const pages = document.getElementById('pages');
+
+const titleError = document.querySelector('#title + span.error');
+const authorError = document.querySelector('#author + span.error');
+const pagesError = document.querySelector('#pages + span.error');
+
 // Constructor function for Book objects
 function Book(title, author, pages, read = false) {
   this.title = title;
@@ -23,8 +32,54 @@ function Book(title, author, pages, read = false) {
   };
 }
 
+title.addEventListener('input', () => {
+  if(title.validity.valid){
+    titleError.textContent = "";
+    titleError.className = "error";
+  } else {
+    showError(title, titleError);
+  }
+});
+
+author.addEventListener('input', () => {
+  if(author.validity.valid){
+    authorError.textContent = "";
+    authorError.className = "error";
+  } else {
+    showError(author, authorError);
+  }
+});
+
+pages.addEventListener('input', () => {
+  if(pages.validity.valid) {
+    pagesError.textContent = "";
+    pagesError.className = "error";
+  } else {
+    showError(pages, pagesError);
+  }
+});
+
+function showError(input, inputError) {
+  if (input.validity.valueMissing) {
+    inputError.textContent = "Please fill out this field";
+  } else if (input.validity.typeMismatch) {
+    inputError.textContent = "Enter a valid value for this field";
+  }
+
+  inputError.className = 'error active';
+}
 // Event listener for form submission
 addBookForm.addEventListener('submit', (event) => {
+  if (!title.validity.valid) {
+    showError(title, titleError);
+    event.preventDefault();
+  } else if (!author.validity.valid) {
+    showError(author, authorError);
+    event.preventDefault();
+  } else if (!pages.validity.valid) {
+    showError(pages, pagesError);
+    event.preventDefault();
+  }
   event.preventDefault();
   addBook();
   resetForm();

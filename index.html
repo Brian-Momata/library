@@ -21,13 +21,25 @@
     <dialog id="add-book-dialog">
       <button id="close-dialog-button">Cancel</button>
       <h2>Add a New Book</h2>
-      <form id="add-book-form">
-        <label for="title">Title:</label>
-        <input type="text" id="title" name="title" required>
-        <label for="author">Author:</label>
-        <input type="text" id="author" name="author" required>
-        <label for="pages">Pages:</label>
-        <input type="number" id="pages" name="pages" required>
+      <form id="add-book-form" novalidate>
+        <label for="title">
+          <span>Title:</span>
+          <input type="text" id="title" name="title" required>
+          <span class="error" aria-live="polite"></span>
+        </label>
+      
+        <label for="author">
+          <span>Author:</span>
+          <input type="text" id="author" name="author" required>
+          <span class="error" aria-live="polite"></span>
+        </label>
+      
+        <label for="pages">
+          <span>Pages:</span>
+          <input type="number" id="pages" name="pages" required>
+          <span class="error" aria-live="polite"></span>
+        </label>
+      
         <input type="hidden" id="read" name="read" value="false">
         <input type="submit" value="Add Book">
       </form>
